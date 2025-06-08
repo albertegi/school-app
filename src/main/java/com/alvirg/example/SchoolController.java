@@ -11,36 +11,21 @@ import java.util.stream.Collectors;
 @RestController
 public class SchoolController {
 
-    private final SchoolRepository schoolRepository;
+    private final SchoolService schoolService;
 
-    public SchoolController(SchoolRepository schoolRepository) {
-
-        this.schoolRepository = schoolRepository;
+    public SchoolController(SchoolService schoolService) {
+        this.schoolService = schoolService;
     }
 
     @PostMapping("/schools")
-    public SchoolDto create(@RequestBody SchoolDto schoolDto){
-
-        var school = toSchool(schoolDto);
-        schoolRepository.save(school);
-        return schoolDto;
+    public SchoolDto saveSchool(@RequestBody SchoolDto schoolDto){
+        return schoolService.saveSchool(schoolDto);
     }
 
-    private School toSchool(SchoolDto schoolDto){
-        return new School(schoolDto.name());
-    }
-
-
-    private SchoolDto toSchoolDto(School school){
-        return new SchoolDto(school.getName());
-    }
 
     @GetMapping("/schools")
-    public List<SchoolDto> findAllStudent(){
+    public List<SchoolDto> findAllSchool(){
 
-        return schoolRepository.findAll()
-                .stream()
-                .map(this::toSchoolDto)
-                .collect(Collectors.toList());
+        return schoolService.findAllSchool();
     }
 }

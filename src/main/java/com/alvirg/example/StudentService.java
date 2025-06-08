@@ -2,8 +2,6 @@ package com.alvirg.example;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -14,12 +12,11 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
-    private final SchoolRepository schoolRepository;
 
-    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper, SchoolRepository schoolRepository) {
+    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper) {
         this.studentRepository = studentRepository;
         this.studentMapper = studentMapper;
-        this.schoolRepository = schoolRepository;
+
     }
 
     public StudentResponseDto saveStudent (StudentDto studentDto){
