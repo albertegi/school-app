@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -29,17 +30,24 @@ public class StudentService {
         return studentMapper.toStudentResponseDto(savedStudent);
     }
 
-    public List<Student> findAllStudent(){
-
-        return studentRepository.findAll();
+    public List<StudentResponseDto> findAllStudent(){
+        return studentRepository.findAll()
+                .stream()
+                .map(studentMapper::toStudentResponseDto)
+                .collect(Collectors.toList());
     }
 
-    public Student findStudentById(Integer id){
-        return studentRepository.findById(id).orElse(new Student());
+    public StudentResponseDto findStudentById(Integer id){
+        return studentRepository.findById(id)
+                .map(studentMapper::toStudentResponseDto)
+                .orElse(null);
     }
 
-    public List<Student>  findStudentByName(String name){
-        return studentRepository.findAllByFirstnameContainingIgnoreCase(name);
+    public List<StudentResponseDto>  findStudentByName(String name){
+        return studentRepository.findAllByFirstnameContainingIgnoreCase(name)
+                .stream()
+                .map(studentMapper::toStudentResponseDto)
+                .collect(Collectors.toList());
     }
 
     public void deleteById(Integer id){
