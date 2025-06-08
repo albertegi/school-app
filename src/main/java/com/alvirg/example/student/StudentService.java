@@ -1,5 +1,6 @@
-package com.alvirg.example;
+package com.alvirg.example.student;
 
+import com.alvirg.example.school.School;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

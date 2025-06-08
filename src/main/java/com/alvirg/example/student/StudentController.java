@@ -1,27 +1,25 @@
-package com.alvirg.example;
+package com.alvirg.example.student;
 
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class StudentController {
 
     private final StudentService studentService;
-    private final StudentMapper studentMapper;
 
-    public StudentController(StudentService studentService, StudentMapper studentMapper) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
-        this.studentMapper = studentMapper;
     }
 
     @PostMapping("/students")
     @ResponseStatus(HttpStatus.CREATED)
-    public StudentResponseDto saveStudent(@RequestBody StudentDto studentDto){
+    public StudentResponseDto saveStudent(
+            @Valid @RequestBody StudentDto studentDto){
         return this.studentService.saveStudent(studentDto);
     }
 

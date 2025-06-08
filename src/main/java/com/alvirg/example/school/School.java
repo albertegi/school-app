@@ -1,5 +1,6 @@
-package com.alvirg.example;
+package com.alvirg.example.school;
 
+import com.alvirg.example.student.Student;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

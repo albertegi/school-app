@@ -1,4 +1,4 @@
-package com.alvirg.example;
+package com.alvirg.example.student;
 
 public record StudentResponseDto(
         String firstname,

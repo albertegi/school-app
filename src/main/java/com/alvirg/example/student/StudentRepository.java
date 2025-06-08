@@ -1,4 +1,4 @@
-package com.alvirg.example;
+package com.alvirg.example.student;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

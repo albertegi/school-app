@@ -1,4 +1,4 @@
-package com.alvirg.example;
+package com.alvirg.example.school;
 
 
 import org.springframework.stereotype.Service;

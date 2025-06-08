@@ -1,5 +1,7 @@
-package com.alvirg.example;
+package com.alvirg.example.student;
 
+import com.alvirg.example.studentprofile.StudentProfile;
+import com.alvirg.example.school.School;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 

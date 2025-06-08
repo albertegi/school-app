@@ -1,5 +1,6 @@
-package com.alvirg.example;
+package com.alvirg.example.studentprofile;
 
+import com.alvirg.example.student.Student;
 import jakarta.persistence.*;
 
 @Entity
