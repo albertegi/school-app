@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 public class StudentMapper {
 
     // We need to convert or transform studentDto object
-    // in line 21 into student object
-    // So we create a private method in line 32 below it will receive exactly studentDto
+    // into student object
+    // So we create a method that will receive exactly studentDto
     // we can use constructor or getter and setters. we used setters here
 
     public Student toStudent(StudentDto studentDto){

@@ -10,63 +10,47 @@ import java.util.List;
 @RestController
 public class StudentController {
 
-    private final StudentRepository studentRepository;
-    private final StudentMapper studentMapper;
+    private final StudentService studentService;
 
-
-    public StudentController(StudentRepository studentRepository, StudentMapper studentMapper) {
-        this.studentRepository = studentRepository;
-        this.studentMapper = studentMapper;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @PostMapping("/students")
     @ResponseStatus(HttpStatus.CREATED)
-    public StudentResponseDto post(@RequestBody StudentDto studentDto){
-
-        // create a variable student, call the toStudent method
-        // pass the variable to the studentRepository save method
-        var student = studentMapper.toStudent(studentDto);
-
-        var savedStudent = studentRepository.save(student);
-
-        return studentMapper.toStudentResponseDto(savedStudent);
+    public StudentResponseDto saveStudent(@RequestBody StudentDto studentDto){
+        return this.studentService.saveStudent(studentDto);
     }
 
 
 
     @GetMapping("/students")
     public List<Student> findAllStudent(){
-        return studentRepository.findAll();
+
+        return studentService.findAllStudent();
     }
 
     @GetMapping("/students/{student-id}")
     public Student findStudentById(@PathVariable("student-id") Integer id){
-        return studentRepository.findById(id).orElse(new Student());
+        return studentService.findStudentById(id);
     }
 
     @GetMapping("/students/search/{student-name}")
     public List<Student>  findStudentByName(@PathVariable("student-name") String name){
-        return studentRepository.findAllByFirstnameContainingIgnoreCase(name);
+        return studentService.findStudentByName(name);
     }
 
     @DeleteMapping("/students/{student-id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("student-id") Integer id){
-        studentRepository.deleteById(id);
+
+        studentService.deleteById(id);
     }
 
     @PutMapping("/students/{student-id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Student update(@RequestBody Student student, @PathVariable("student-id") Integer id) {
-        return studentRepository.findById(id)
-                .map(existingStudent -> {
-                    existingStudent.setFirstname(student.getFirstname());
-                    existingStudent.setLastname(student.getLastname());
-                    existingStudent.setEmail(student.getEmail());
-                    existingStudent.setAge(student.getAge());
-                    return studentRepository.save(existingStudent);
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found"));
+    @ResponseStatus(HttpStatus.OK)
+    public StudentResponseDto update(@RequestBody StudentDto studentDto, @PathVariable("student-id") Integer id) {
+        return studentService.updateStudentById(id, studentDto);
     }
 
 
