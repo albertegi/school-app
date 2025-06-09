@@ -13,7 +13,6 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer age;
 
     private String firstname;
 
@@ -21,6 +20,8 @@ public class Student {
 
     @Column(unique = true)
     private String email;
+
+    private Integer age;
 
     @OneToOne(
             mappedBy = "student",
@@ -40,11 +41,12 @@ public class Student {
 
 
 
-    public Student(Integer age, String firstname, String lastname,  String email) {
-        this.age = age;
+    public Student(String firstname, String lastname,  String email, Integer age) {
+
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.age = age;
 
     }
 
@@ -59,13 +61,6 @@ public class Student {
         this.id = id;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
 
     public String getFirstname() {
         return firstname;
@@ -89,6 +84,14 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public StudentProfile getStudentProfile() {
