@@ -12,6 +12,11 @@ public class StudentMapper {
     // we can use constructor or getter and setters. we used setters here
 
     public Student toStudent(StudentDto studentDto){
+
+        if(studentDto == null){
+            throw new NullPointerException("The student dto should not be null");
+        }
+
         Student student = new Student();
         student.setFirstname(studentDto.firstname());
         student.setLastname(studentDto.lastname());

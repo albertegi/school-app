@@ -34,6 +34,15 @@ class StudentMapperTest {
     }
 
     @Test
+    public void shouldThrowNullPointerExceptionWhenStudentDtoIsNull(){
+//        studentMapper.toStudent(null);
+
+        var expMsg = assertThrows(NullPointerException.class, () -> studentMapper.toStudent(null));
+        assertEquals("The student dto should not be null", expMsg.getMessage());
+
+    }
+
+    @Test
     public void shouldMapStudentToStudentResponseDto(){
         // Given
         Student student = new Student(
@@ -51,34 +60,5 @@ class StudentMapperTest {
         Assertions.assertEquals(studentResponseDto.email(), student.getEmail());
 
     }
-
-
-    @BeforeAll
-    static void beforeAll() {
-        System.out.println("Inside the before All method");
-    }
-
-    @AfterAll
-    static void afterAll() {
-        System.out.println("Inside the after All method");
-    }
-
-
-
-    @AfterEach
-    void tearDown() {
-        System.out.println("Inside the after each method");
-    }
-
-    @Test
-    public void testMethod1(){
-        System.out.println("My first test method");
-    }
-
-    @Test
-    public void testMethod2(){
-        System.out.println("My second test method");
-    }
-
 
 }
