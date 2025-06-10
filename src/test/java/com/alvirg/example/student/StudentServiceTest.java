@@ -38,7 +38,7 @@ class StudentServiceTest {
 
         Student student = new Student(
                 "Jane",
-                "Smith",
+                "Doe",
                 "markcollins@gmail.com",
                 20);
 
