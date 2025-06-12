@@ -176,4 +176,31 @@ class StudentServiceTest {
         Mockito.verify(studentRepository, Mockito.times(1)).findAllByFirstnameContainingIgnoreCase(studentName);
 
     }
+
+    @Test
+    public void shouldDeleteAStudentById(){
+
+        // Given
+        Integer studentId = 1;
+
+        Student student = new Student(
+                "Jane",
+                "Smith",
+                "markcollins@gmail.com",
+                20
+        );
+
+        // Mock call
+        Mockito.when(studentRepository.findById(studentId))
+                .thenReturn(Optional.of(student));
+
+        // When
+        studentService.deleteById(studentId);
+
+        // Then
+
+        Mockito.verify(studentRepository, Mockito.times(1)).deleteById(studentId);
+
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.alvirg.example.student;
 
 import com.alvirg.example.school.School;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -47,7 +48,11 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteById(Integer id){
+
+
+    public void deleteById(Integer id) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found"));
         studentRepository.deleteById(id);
     }
 
